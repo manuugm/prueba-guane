@@ -4,16 +4,21 @@
       <Track title="Pickup" zip="Zip from" city="City from" type="pickup" />
       <Track title="Delivery" zip="Zip to" city="City to" type="delivery" />
     </div>
+    <div class="hauls__accessorials">
+      <Accessorials />
+    </div>
   </div>
 </template>
 
 <script>
 import Track from "@/components/Track";
+import Accessorials from "@/components/Accessorials";
 
 export default {
   name: "Hauls",
   components: {
     Track,
+    Accessorials,
   },
 };
 </script>
@@ -21,11 +26,13 @@ export default {
 <style scoped lang="scss">
 .hauls {
   background-color: #e2e2e2;
+  padding: 10px 0;
   width: 100vw;
 
   &__track {
     display: flex;
-    padding: 10px 20px;
+    margin-bottom: 20px;
+    padding: 0px 20px;
 
     .track {
       flex-basis: 50%;
@@ -34,6 +41,9 @@ export default {
         margin-right: 30px;
       }
     }
+  }
+  &__accessorials {
+    padding: 0 20px;
   }
 }
 </style>
