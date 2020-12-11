@@ -7,18 +7,23 @@
     <div class="hauls__accessorials">
       <Accessorials />
     </div>
+    <div class="hauls__table">
+      <HaulTable />
+    </div>
   </div>
 </template>
 
 <script>
 import Track from "@/components/Track";
 import Accessorials from "@/components/Accessorials";
+import HaulTable from "@/components/HaulTable";
 
 export default {
   name: "Hauls",
   components: {
     Track,
     Accessorials,
+    HaulTable,
   },
 };
 </script>
@@ -44,6 +49,10 @@ export default {
   }
   &__accessorials {
     padding: 0 20px;
+    margin-bottom: 20px;
+  }
+  &__table {
+    padding: 0 10px;
   }
 }
 </style>
