@@ -9,7 +9,7 @@
       >
       <b-button variant="success" @click="addNewRow">Add new row</b-button>
     </div>
-    <b-table striped outlined hover :fields="fields" :items="items">
+    <b-table striped outlined hover :fields="fields" :items="tableRows">
       <template #head(checkbox)>
         <b-form-checkbox
           id="checkbox-head"
@@ -30,33 +30,28 @@
       </template>
     </b-table>
   </div>
-</template>
+</template> 
 
 <script>
 export default {
   name: "HaulTable",
+  props: ["rows"],
   data() {
     return {
       selected: [],
       fields: ["checkbox", "hu_count", "dimensions", "weight"],
-      items: [
-        {
-          hu_count: "1 Pallet",
-          dimensions: "48.0 X 48.0 X 48.0 Inch",
-          weight: "1.0 lb",
-        },
-        {
-          hu_count: "1 Pallet",
-          dimensions: "48.0 X 48.0 X 48.0 Inch",
-          weight: "1.0 lb",
-        },
-      ],
+      tableRows: []
     };
+  },
+  watch: {
+    rows() {
+      this.tableRows = this.rows.slice(0);
+    }
   },
   computed: {
     toggleAll: {
       get() {
-        return this.selected.length === this.items.length ? "selected-all" : "";
+        return this.selected.length === this.tableRows.length ? "selected-all" : "";
       },
       set(newValue) {
         return newValue;
@@ -65,10 +60,10 @@ export default {
   },
   methods: {
     toggleAllRows() {
-      const isSelectedAll = this.selected.length === this.items.length;
+      const isSelectedAll = this.selected.length === this.tableRows.length;
 
       if (!isSelectedAll) {
-        this.items.forEach((item, index) => {
+        this.tableRows.forEach((item, index) => {
           const isSelected = this.selected.indexOf(index) > -1;
 
           if (!isSelected) {
@@ -80,13 +75,13 @@ export default {
       }
     },
     deleteSelected() {
-      const newItems = this.items.filter((item, index) => {
+      const newItems = this.tableRows.filter((item, index) => {
         if (!this.selected.includes(index)) {
           return item;
         }
       });
 
-      this.items = newItems;
+      this.tableRows = newItems;
       this.selected = [];
     },
     addNewRow() {
@@ -96,7 +91,7 @@ export default {
         weight: "7.0 lb",
       };
 
-      this.items.push(newRow);
+      this.tableRows.push(newRow);
     },
   },
 };
